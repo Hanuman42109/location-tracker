@@ -6,9 +6,12 @@
                android:roundIcon="@mipmap/appicon_round"
                android:supportsRtl="true">
 
-    <!-- Google Maps API key. Create one in Google Cloud Console (enable "Maps SDK for Android"). -->
+    <!--
+      Google Maps API key (enable "Maps SDK for Android" in Google Cloud Console).
+      ${googleMapsApiKey} is filled in at build time from ApiKeys.props - see README.md.
+    -->
     <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="YOUR_GOOGLE_MAPS_API_KEY" />
+               android:value="${googleMapsApiKey}" />
 
     <!-- Required by the Google Maps SDK on older Android versions. -->
     <uses-library android:name="org.apache.http.legacy" android:required="false" />

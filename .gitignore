@@ -2,3 +2,6 @@ bin/
 obj/
 .vs/
 *.user
+
+# Local secrets (Google Maps API key)
+ApiKeys.props

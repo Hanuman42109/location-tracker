@@ -19,6 +19,17 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <!--
+    Google Maps API key. The real key lives in ApiKeys.props, which is git-ignored so it never
+    ends up in source control. See README.md, "Before you run".
+  -->
+  <Import Project="ApiKeys.props" Condition="Exists('ApiKeys.props')" />
+  <PropertyGroup>
+    <GoogleMapsApiKey Condition="'$(GoogleMapsApiKey)' == ''">YOUR_GOOGLE_MAPS_API_KEY</GoogleMapsApiKey>
+    <!-- Replaces ${googleMapsApiKey} in Platforms/Android/AndroidManifest.xml at build time. -->
+    <AndroidManifestPlaceholders>googleMapsApiKey=$(GoogleMapsApiKey)</AndroidManifestPlaceholders>
+  </PropertyGroup>
+
   <ItemGroup>
     <!-- App icon (generated into platform-specific assets at build time). -->
     <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />

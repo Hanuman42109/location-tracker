@@ -37,7 +37,16 @@ Visual Studio for Mac was retired by Microsoft in August 2024. Use instead:
 1. **Google Maps API key (Android only).** iOS uses Apple Maps and needs no key.
    1. Go to https://console.cloud.google.com/, create a project and enable **Maps SDK for Android**.
    2. **APIs & Services > Credentials > Create credentials > API key**.
-   3. Replace `YOUR_GOOGLE_MAPS_API_KEY` in `Platforms/Android/AndroidManifest.xml` with the key.
+   3. Create a file named `ApiKeys.props` next to `HeatMapTracker.csproj` with this content:
+      ```xml
+      <Project>
+        <PropertyGroup>
+          <GoogleMapsApiKey>PASTE_YOUR_KEY_HERE</GoogleMapsApiKey>
+        </PropertyGroup>
+      </Project>
+      ```
+      At build time the key replaces `${googleMapsApiKey}` in `Platforms/Android/AndroidManifest.xml`.
+      `ApiKeys.props` is git-ignored, so the key never ends up in source control.
    Without a valid key the app still runs and records points, but the map stays blank.
 2. If you don't have the .NET 10 SDK, change `net10.0-*` to `net9.0-*` / `net8.0-*` in the `.csproj`.
 
