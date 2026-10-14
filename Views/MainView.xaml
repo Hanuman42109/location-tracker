@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:HeatMapTracker.Controls"
+             xmlns:vm="clr-namespace:HeatMapTracker.ViewModels"
+             x:Class="HeatMapTracker.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             Title="MainView">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- The map fills the whole page; the control panel floats above it. -->
+        <controls:HeatMap Grid.RowSpan="2"
+                          MapType="Street"
+                          CellSizeMeters="25"
+                          HeatPoints="{Binding HeatPoints}"
+                          IsShowingUser="{Binding IsLocationPermissionGranted}" />
+
+        <Border Grid.Row="1"
+                Margin="16"
+                Padding="12"
+                StrokeThickness="0"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#222222}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="12" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="{Binding StatusText}"
+                       HorizontalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                    <Button Text="{Binding TrackingButtonText}"
+                            Command="{Binding ToggleTrackingCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White" />
+                    <Button Grid.Column="1"
+                            Text="Clear history"
+                            Command="{Binding ClearCommand}"
+                            BackgroundColor="Gray"
+                            TextColor="White" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

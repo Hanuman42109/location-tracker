@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <application android:allowBackup="true"
+               android:icon="@mipmap/appicon"
+               android:roundIcon="@mipmap/appicon_round"
+               android:supportsRtl="true">
+
+    <!-- Google Maps API key. Create one in Google Cloud Console (enable "Maps SDK for Android"). -->
+    <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="YOUR_GOOGLE_MAPS_API_KEY" />
+
+    <!-- Required by the Google Maps SDK on older Android versions. -->
+    <uses-library android:name="org.apache.http.legacy" android:required="false" />
+  </application>
+
+  <!-- Location (precise + approximate) -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+  <!-- Map tiles -->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+  <!-- The app works on devices without GPS hardware (e.g. tablets using network location). -->
+  <uses-feature android:name="android.hardware.location" android:required="false" />
+  <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+</manifest>
